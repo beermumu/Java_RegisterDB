@@ -1,0 +1,36 @@
+.root{
+    -fx-font-family: "Arial Narrow";
+    -fx-base:#4f7ac5;
+    -fx-background: #55c6dc;
+}
+.toggle-button {
+    -fx-background-color: #A4E7DF;
+}
+
+.button {
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#a4e7df, #a8cce8);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.button:hover {
+    -fx-text-fill: white;
+    -fx-background-color: linear-gradient(#a8cce8, #a4e7df);
+}
+
+.text-field {
+    -fx-background-color: #b0c9f5 , #b0c9f5 , #b0c9f5;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+}
+
+.text-field:focused {
+    -fx-background-color: #b0c9f5 , #b0c9f5 , #b0c9f5;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+}
+
+.combo-box-base {
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, #b0c9f5;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3px, 3px, 2px, 1px;
+}
