@@ -4,12 +4,12 @@ public class Subject {
     private String COURSEID;
     private String NAME;
     private String PREREQ;
-    private int PASS;
+    private String PASS;
     private int YEAR;
     private int SEM;
     private String COLOR;
 
-    public Subject(String COURSEID, String NAME, String PREREQ, int PASS, int YEAR, int SEM, String COLOR) {
+    public Subject(String COURSEID, String NAME, String PREREQ, String PASS, int YEAR, int SEM, String COLOR) {
         this.COURSEID = COURSEID;
         this.NAME = NAME;
         this.PREREQ = PREREQ;
@@ -31,7 +31,7 @@ public class Subject {
         return PREREQ;
     }
 
-    public int getPASS() {
+    public String getPASS() {
         return PASS;
     }
 

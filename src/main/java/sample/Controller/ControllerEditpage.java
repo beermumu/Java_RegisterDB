@@ -50,7 +50,7 @@ public class ControllerEditpage {
                 if (pageSubject.getSelectionModel().getSelectedItem() != null) {
                     fieldcourseid.setText(pageSubject.getSelectionModel().getSelectedItem().getCOURSEID());
                     fieldname.setText(pageSubject.getSelectionModel().getSelectedItem().getNAME());
-                    fieldpass.setText(Integer.toString(pageSubject.getSelectionModel().getSelectedItem().getPASS()));
+                    fieldpass.setText(pageSubject.getSelectionModel().getSelectedItem().getPASS());
                     fieldprereq.setText(pageSubject.getSelectionModel().getSelectedItem().getPREREQ());
 
                     fieldpass.setDisable(true);
@@ -95,7 +95,7 @@ public class ControllerEditpage {
     @FXML
     public void pressUpdate(ActionEvent event) {
 
-        subjectDB.updateData(fieldcourseid.getText(), fieldname.getText(), fieldprereq.getText(), Integer.parseInt(fieldpass.getText()), colorBox.getSelectionModel().getSelectedItem().toString(), Integer.parseInt(yearBox.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(semBox.getSelectionModel().getSelectedItem().toString()));
+        subjectDB.updateData(fieldcourseid.getText(), fieldname.getText(), fieldprereq.getText(), fieldpass.getText(), colorBox.getSelectionModel().getSelectedItem().toString(), Integer.parseInt(yearBox.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(semBox.getSelectionModel().getSelectedItem().toString()));
         fieldcourseid.clear();
         fieldname.clear();
         fieldprereq.clear();
@@ -170,7 +170,7 @@ public class ControllerEditpage {
 
 
     public void changeNotPass() {
-        subjectDB.updatePass(pageSubject.getSelectionModel().getSelectedItem().getCOURSEID(), 0);
+        subjectDB.updatePass(pageSubject.getSelectionModel().getSelectedItem().getCOURSEID(), "NotPass");
         if (pageSubject.getSelectionModel().getSelectedItem() != null) {
             Map<String, String> h = subjectDB.getAllPreReq();
             List<String> val = new ArrayList<String>(h.values());
@@ -186,7 +186,7 @@ public class ControllerEditpage {
                         for (int j = 0; j < hold1.length; j++) {
                             if (hold1[j].contains(courseidCollect.get(c))) {
                                 courseidCollect.add(key.get(i));
-                                subjectDB.updatePass(key.get(i), 0);
+                                subjectDB.updatePass(key.get(i), "NotPass");
                             }
                         }
 
@@ -194,12 +194,12 @@ public class ControllerEditpage {
                         String[] hold2 = mid[1].split(",");
                         if (val.get(i).contains(courseidCollect.get(c))) {
                             for (int j = 0; j < hold2.length; j++) {
-                                if (subjectDB.getPass(hold2[j]) == 1) {
+                                if (subjectDB.getPass(hold2[j]).equals("Pass")) {
                                     count++;
                                 }
                                 if (count == 1 && j == hold2.length - 1) {
                                     courseidCollect.add(key.get(i));
-                                    subjectDB.updatePass(key.get(i), 0);
+                                    subjectDB.updatePass(key.get(i), "NotPass");
                                 }
                             }
                         }
@@ -210,7 +210,7 @@ public class ControllerEditpage {
                         for (int j = 0; j < hold1.length; j++) {
                             if (hold1[j].contains(courseidCollect.get(c))) {
                                 courseidCollect.add(key.get(i));
-                                subjectDB.updatePass(key.get(i), 0);
+                                subjectDB.updatePass(key.get(i), "NotPass");
                             }
                         }
                     } else if (val.get(i).contains(",")) {
@@ -218,18 +218,18 @@ public class ControllerEditpage {
                         String[] hold1 = val.get(i).split(",");
                         if (val.get(i).contains(courseidCollect.get(c))) {
                             for (int j = 0; j < hold1.length; j++) {
-                                if (subjectDB.getPass(hold1[j]) == 1) {
+                                if (subjectDB.getPass(hold1[j]).equals("Pass")) {
                                     count++;
                                 }
                                 if (count == 1 && j == hold1.length - 1) {
                                     courseidCollect.add(key.get(i));
-                                    subjectDB.updatePass(key.get(i), 0);
+                                    subjectDB.updatePass(key.get(i), "NotPass");
                                 }
                             }
                         }
                     } else {
                         if (val.get(i).contains(courseidCollect.get(c))) {
-                            subjectDB.updatePass(key.get(i), 0);
+                            subjectDB.updatePass(key.get(i), "NotPass");
                             courseidCollect.add(key.get(i));
                         }
                     }

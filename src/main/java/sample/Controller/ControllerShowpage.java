@@ -66,7 +66,7 @@ public class ControllerShowpage {
             for (int i = 0; i < h.size() - 1; i++) {
                 if (Integer.parseInt(h.get(h.size() - 1)) == 3) {
                     if (!h.get(i).equals("/")) {
-                        if (subjectDB.getPass(h.get(i)) == 1) {
+                        if (subjectDB.getPass(h.get(i)).equals("Pass")) {
                             p2 += 1;
                         }
                     } else {
@@ -74,34 +74,34 @@ public class ControllerShowpage {
                         p2 = 0;
                     }
                     if (p1 == h.indexOf("/") && p2 >= 1) {
-                        subjectDB.updatePass(pageSubject.getSelectionModel().getSelectedItem().getCOURSEID(), 1);
+                        subjectDB.updatePass(pageSubject.getSelectionModel().getSelectedItem().getCOURSEID(), "Pass");
                     }
                 } else if (Integer.parseInt(h.get(h.size() - 1)) == 1) {
-                    if (subjectDB.getPass(h.get(i)) == 1) {
+                    if (subjectDB.getPass(h.get(i)).equals("Pass")) {
                         p1 = 1;
                     }
                     if (p1 == 1) {
-                        subjectDB.updatePass(pageSubject.getSelectionModel().getSelectedItem().getCOURSEID(), 1);
+                        subjectDB.updatePass(pageSubject.getSelectionModel().getSelectedItem().getCOURSEID(), "Pass");
                     }
                 } else if (Integer.parseInt(h.get(h.size() - 1)) == 2) {
-                    if (subjectDB.getPass(h.get(i)) == 1) {
+                    if (subjectDB.getPass(h.get(i)).equals("Pass")) {
                         p1 += 1;
                     }
                     if (p1 == h.size() - 1) {
-                        subjectDB.updatePass(pageSubject.getSelectionModel().getSelectedItem().getCOURSEID(), 1);
+                        subjectDB.updatePass(pageSubject.getSelectionModel().getSelectedItem().getCOURSEID(), "Pass");
                     }
                 } else if (Integer.parseInt(h.get(h.size() - 1)) == 4) {
-                    if (subjectDB.getPass(h.get(i)) == 1) {
-                        subjectDB.updatePass(pageSubject.getSelectionModel().getSelectedItem().getCOURSEID(), 1);
+                    if (subjectDB.getPass(h.get(i)).equals("Pass")) {
+                        subjectDB.updatePass(pageSubject.getSelectionModel().getSelectedItem().getCOURSEID(), "Pass");
                     } else if (h.get(i).equals("na")) {
-                        subjectDB.updatePass(pageSubject.getSelectionModel().getSelectedItem().getCOURSEID(), 1);
-                    } else if (subjectDB.getPass(h.get(i)) == 0) {
-                        subjectDB.updatePass(pageSubject.getSelectionModel().getSelectedItem().getCOURSEID(), 0);
+                        subjectDB.updatePass(pageSubject.getSelectionModel().getSelectedItem().getCOURSEID(), "Pass");
+                    } else if (subjectDB.getPass(h.get(i)).equals("NotPass")) {
+                        subjectDB.updatePass(pageSubject.getSelectionModel().getSelectedItem().getCOURSEID(), "NotPass");
                     }
                 }
             }
         }
-        if (subjectDB.getPass(pageSubject.getSelectionModel().getSelectedItem().getCOURSEID())==0) {
+        if (subjectDB.getPass(pageSubject.getSelectionModel().getSelectedItem().getCOURSEID()).equals("NotPass")) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setHeaderText("Should pass prereq");
@@ -112,7 +112,7 @@ public class ControllerShowpage {
     }
 
     public void changeNotPass() {
-        subjectDB.updatePass(pageSubject.getSelectionModel().getSelectedItem().getCOURSEID(), 0);
+        subjectDB.updatePass(pageSubject.getSelectionModel().getSelectedItem().getCOURSEID(), "NotPass");
         if (pageSubject.getSelectionModel().getSelectedItem() != null) {
             Map<String, String> h = subjectDB.getAllPreReq();
             List<String> val = new ArrayList<String>(h.values());
@@ -128,7 +128,7 @@ public class ControllerShowpage {
                         for (int j = 0; j < hold1.length; j++) {
                             if (hold1[j].contains(courseidCollect.get(c))) {
                                 courseidCollect.add(key.get(i));
-                                subjectDB.updatePass(key.get(i), 0);
+                                subjectDB.updatePass(key.get(i), "NotPass");
                             }
                         }
 
@@ -136,12 +136,12 @@ public class ControllerShowpage {
                         String[] hold2 = mid[1].split(",");
                         if (val.get(i).contains(courseidCollect.get(c))) {
                             for (int j = 0; j < hold2.length; j++) {
-                                if (subjectDB.getPass(hold2[j]) == 1) {
+                                if (subjectDB.getPass(hold2[j]) .equals("Pass")) {
                                     count++;
                                 }
                                 if (count == 1 && j == hold2.length - 1) {
                                     courseidCollect.add(key.get(i));
-                                    subjectDB.updatePass(key.get(i), 0);
+                                    subjectDB.updatePass(key.get(i), "NotPass");
                                 }
                             }
                         }
@@ -152,7 +152,7 @@ public class ControllerShowpage {
                         for (int j = 0; j < hold1.length; j++) {
                             if (hold1[j].contains(courseidCollect.get(c))) {
                                 courseidCollect.add(key.get(i));
-                                subjectDB.updatePass(key.get(i), 0);
+                                subjectDB.updatePass(key.get(i), "NotPass");
                             }
                         }
                     } else if (val.get(i).contains(",")) {
@@ -160,25 +160,25 @@ public class ControllerShowpage {
                         String[] hold1 = val.get(i).split(",");
                         if (val.get(i).contains(courseidCollect.get(c))) {
                             for (int j = 0; j < hold1.length; j++) {
-                                if (subjectDB.getPass(hold1[j]) == 1) {
+                                if (subjectDB.getPass(hold1[j]).equals("Pass")) {
                                     count++;
                                 }
                                 if (count == 1 && j == hold1.length - 1) {
                                     courseidCollect.add(key.get(i));
-                                    subjectDB.updatePass(key.get(i), 0);
+                                    subjectDB.updatePass(key.get(i), "NotPass");
                                 }
                             }
                         }
                     } else {
                         if (val.get(i).contains(courseidCollect.get(c))) {
-                            subjectDB.updatePass(key.get(i), 0);
+                            subjectDB.updatePass(key.get(i), "NotPass");
                             courseidCollect.add(key.get(i));
                         }
                     }
                 }
                 c++;
             }
-            if (pageSubject.getSelectionModel().getSelectedItem().getPASS()==0 ) {
+            if (pageSubject.getSelectionModel().getSelectedItem().getPASS().equals("NotPass") ) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning");
                 alert.setHeaderText("Should NOTPASS only pass subject");

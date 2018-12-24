@@ -64,7 +64,7 @@ public class SubjectDB {
                 String id = rs.getString("courseid");
                 String name = rs.getString("name");
                 String pre = rs.getString("prereq");
-                int pass = rs.getInt("pass");
+                String pass = rs.getString("pass");
                 String color = rs.getString("color");
                 int year = rs.getInt("year");
                 int sem = rs.getInt("sem");
@@ -97,7 +97,7 @@ public class SubjectDB {
                 String id = rs.getString("courseid");
                 String name = rs.getString("name");
                 String pre = rs.getString("prereq");
-                int pass = rs.getInt("pass");
+                String pass = rs.getString("pass");
                 String color = rs.getString("color");
                 int year = rs.getInt("year");
                 int sem = rs.getInt("sem");
@@ -144,7 +144,7 @@ public class SubjectDB {
                 String id = rs.getString("courseid");
                 String name = rs.getString("name");
                 String pre = rs.getString("prereq");
-                int pass = rs.getInt("pass");
+                String pass = rs.getString("pass");
                 String color = rs.getString("color");
                 int year = rs.getInt("year");
                 int sem = rs.getInt("sem");
@@ -166,7 +166,7 @@ public class SubjectDB {
         return ans;
     }
 
-    public void addData(String id, String name, String pre, int pass, String color, int year, int sem) {
+    public void addData(String id, String name, String pre, String pass, String color, int year, int sem) {
         Connection c = null;
         Statement stmt = null;
         try {
@@ -187,7 +187,7 @@ public class SubjectDB {
         }
     }
 
-    public void updateData(String id, String name, String pre, int pass, String color, int year, int sem) {
+    public void updateData(String id, String name, String pre, String pass, String color, int year, int sem) {
         Connection c = null;
         Statement stmt = null;
         try {
@@ -207,10 +207,10 @@ public class SubjectDB {
         }
     }
 
-    public Integer getPass(String courseid) {
+    public String getPass(String courseid) {
         Connection c = null;
         Statement stmt = null;
-        int ans = 0;
+        String ans = "";
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:subjectdb.db");
@@ -218,7 +218,7 @@ public class SubjectDB {
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM SUBJECT WHERE COURSEID = \'" + courseid + "\'");
             while (rs.next()) {
-                int pass = rs.getInt("pass");
+                String pass = rs.getString("pass");
                 ans = pass;
             }
             rs.close();
@@ -231,7 +231,7 @@ public class SubjectDB {
         return ans;
     }
 
-    public void updatePass(String courseid, int pass) {
+    public void updatePass(String courseid, String pass) {
         Connection c = null;
         Statement stmt = null;
         try {
@@ -344,7 +344,7 @@ public class SubjectDB {
             c.setAutoCommit(false);
 
             stmt = c.createStatement();
-            String sql = "UPDATE SUBJECT set PASS= 0";
+            String sql = "UPDATE SUBJECT set PASS= 'NotPass'";
             stmt.executeUpdate(sql);
             stmt.close();
             c.commit();
