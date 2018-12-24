@@ -55,7 +55,7 @@ public class ControllerFirstpage {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/editpage.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            stage.setTitle("SHOW");
+            stage.setTitle("EDIT");
             stage.setScene(new Scene(root1));
             stage.show();
         } catch (Exception e) {
