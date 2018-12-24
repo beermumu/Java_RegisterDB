@@ -354,5 +354,28 @@ public class SubjectDB {
             System.exit(0);
         }
     }
+
+    public boolean checkCourseId(String courseid) {
+        Connection c = null;
+        Statement stmt = null;
+        boolean ans = false;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:subjectdb.db");
+            c.setAutoCommit(false);
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM SUBJECT WHERE COURSEID LIKE '%" + courseid + "%'");
+            while (rs.next()) {
+                ans = true;
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return ans;
+    }
 }
 

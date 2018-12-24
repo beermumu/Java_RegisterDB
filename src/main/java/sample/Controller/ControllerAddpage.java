@@ -51,7 +51,16 @@ public class ControllerAddpage {
     public void pressButtonSave(ActionEvent event) {
         try {
             if (Integer.parseInt(courseid.getText())>=0){
-                subjectDB.addData(courseid.getText(), name.getText(), prereq.getText(), "NotPass", colorBox.getSelectionModel().getSelectedItem().toString(), Integer.parseInt(yearBox.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(semBox.getSelectionModel().getSelectedItem().toString()));
+                if (subjectDB.checkCourseId(courseid.getText())){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERROR");
+                    alert.setHeaderText("Duplicate Course ID");
+                    alert.setContentText("CourseID should unique.");
+                    alert.showAndWait();
+                }else {
+                    subjectDB.addData(courseid.getText(), name.getText(), prereq.getText(), "NotPass", colorBox.getSelectionModel().getSelectedItem().toString(), Integer.parseInt(yearBox.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(semBox.getSelectionModel().getSelectedItem().toString()));
+
+                }
             }else {
                 throw new NumberFormatException();
             }
